@@ -4,7 +4,7 @@ set -e
 
 echo "Waiting for PrestaShop..."
 
-until curl -s -I http://localhost:8081/administration/login?_token= | grep -q "200 OK"; do
+until curl -s -I http://prestashop/administration/login?_token= | grep -q "200 OK"; do
   echo "Waiting for 200 OK response..."
   sleep 3
 done
