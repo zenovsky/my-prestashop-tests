@@ -1,26 +1,22 @@
 import logging
+
 import allure
 
 from api.models.customer_builder import CustomerBuilder
-from utils.decorators import log_action
 from utils.data_generator import default_generator
+from utils.decorators import log_action
 
 logger = logging.getLogger(__name__)
 
-class CustomerFactory:
 
+class CustomerFactory:
     def __init__(self, customers_api):
         self.api = customers_api
         self._ids = []
         self._secure_keys = {}
 
     @log_action
-    def create(
-        self, 
-        lastname=None,
-        firstname=None,
-        email=None
-    ):
+    def create(self, lastname=None, firstname=None, email=None):
         if lastname is None or firstname is None or email is None:
             user_data = default_generator.generate_user_data()
             lastname = lastname or user_data["lastname"]
@@ -30,47 +26,33 @@ class CustomerFactory:
         allure.attach(
             f"Firstname: {firstname}\nLastname: {lastname}\nEmail: {email}",
             name="Customer Generation Data",
-            attachment_type=allure.attachment_type.TEXT
-        )    
-
-        xml = CustomerBuilder.create(
-            lastname=lastname,
-            firstname=firstname,
-            email=email
+            attachment_type=allure.attachment_type.TEXT,
         )
+
+        xml = CustomerBuilder.create(lastname=lastname, firstname=firstname, email=email)
         customer_id, secure_key = self.api.create(xml)
         self._ids.append(customer_id)
         self._secure_keys[customer_id] = secure_key
-        return {
-            "customer_id": customer_id,
-            "lastname": lastname,
-            "firstname": firstname,
-            "email": email
-        }
-    
+        return {"customer_id": customer_id, "lastname": lastname, "firstname": firstname, "email": email}
+
     @log_action
     def get_secure_key(self, customer_id):
         return self._secure_keys.get(customer_id)
-    
+
     @log_action
     def get(self, customer_id):
         response = self.api.get(customer_id)
-        return response     
+        return response
 
     @log_action
     def update(self, customer_id, lastname, firstname, email, new_note):
 
         xml = CustomerBuilder.update(
-            customer_id=customer_id,
-            lastname=lastname,
-            firstname=firstname,
-            email=email,
-            note=new_note
-
+            customer_id=customer_id, lastname=lastname, firstname=firstname, email=email, note=new_note
         )
         self.api.update(customer_id, xml)
         updated_data = self.api.get(customer_id)
-        assert updated_data['note'] == new_note
+        assert updated_data["note"] == new_note
 
     @log_action
     def delete(self, customer_id):
@@ -84,12 +66,12 @@ class CustomerFactory:
             else:
                 raise e
 
-    @log_action                       
+    @log_action
     def cleanup(self):
         for pid in self._ids[:]:
             try:
                 self.api.delete(pid)
-                logger.info(f"Customer cleanup: {pid}")    
+                logger.info(f"Customer cleanup: {pid}")
             except Exception:
                 pass
             self._ids.remove(pid)

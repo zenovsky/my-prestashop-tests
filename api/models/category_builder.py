@@ -1,5 +1,4 @@
 class CategoryBuilder:
-
     @staticmethod
     def create(
         name="Test Category",
@@ -7,7 +6,7 @@ class CategoryBuilder:
         meta_title="Test API",
         meta_description="Testing for API",
         parent_id=0,
-        active_status="1"
+        active_status="1",
     ):
         link_rewrite = name.lower().replace(" ", "-")
 

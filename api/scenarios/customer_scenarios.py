@@ -1,19 +1,19 @@
 import allure
 
-class CustomerScenario:
 
+class CustomerScenario:
     def __init__(self, customers_factory):
         self.customers_factory = customers_factory
 
     @allure.step("Precondition: Existing customer")
     def existing_customer(self):
         customer_data = self.customers_factory.create()
-        return customer_data    
+        return customer_data
 
     @allure.step("Create customer")
     def create_customer(self):
         return self.customers_factory.create()
-    
+
     @allure.step("Get customer")
     def get_customer(self, customer_id):
         return self.customers_factory.get(customer_id)
@@ -25,9 +25,9 @@ class CustomerScenario:
             lastname=lastname or customer_data["lastname"],
             firstname=firstname or customer_data["firstname"],
             email=email or customer_data["email"],
-            new_note=note
+            new_note=note,
         )
 
     @allure.step("Delete customer")
     def delete_customer(self, customer_id):
-        return self.customers_factory.delete(customer_id)    
+        return self.customers_factory.delete(customer_id)

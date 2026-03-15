@@ -1,11 +1,8 @@
 class ProductBuilder:
-
     @staticmethod
     def create(name="Test product", price=29.90, category_id=4):
         link_rewrite = name.lower().replace(" ", "-") if name else ""
-        price_value = (
-            f"{price:.6f}" if isinstance(price, (int, float)) else price
-        )
+        price_value = f"{price:.6f}" if isinstance(price, (int, float)) else price
         return f"""
 <prestashop>
   <product>

@@ -25,7 +25,7 @@ class UserDataGenerator:
             "address": address,
             "city": city,
             "postcode": postcode,
-            "phone": phone
+            "phone": phone,
         }
 
 

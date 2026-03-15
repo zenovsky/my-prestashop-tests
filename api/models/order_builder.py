@@ -1,5 +1,4 @@
 class OrderBuilder:
-
     @staticmethod
     def create(cart_id, address_id, customer_id, secure_key):
         return f"""<?xml version="1.0" encoding="UTF-8"?>
@@ -9,12 +8,12 @@ class OrderBuilder:
         <id_customer><![CDATA[{customer_id}]]></id_customer>
         <id_address_delivery><![CDATA[{address_id}]]></id_address_delivery>
         <id_address_invoice><![CDATA[{address_id}]]></id_address_invoice>
-        
+
         <id_currency><![CDATA[1]]></id_currency>
         <id_lang><![CDATA[1]]></id_lang>
         <id_carrier><![CDATA[2]]></id_carrier>
         <current_state><![CDATA[1]]></current_state>
-        
+
         <module><![CDATA[ps_checkpayment]]></module>
         <payment><![CDATA[Payment by check]]></payment>
 
@@ -39,7 +38,6 @@ class OrderBuilder:
     </order>
 </prestashop>
 """
-    
 
     @staticmethod
     def update(order_id, cart_id, customer_id, address_id, note="Updated note"):
@@ -64,4 +62,4 @@ class OrderBuilder:
         <conversion_rate><![CDATA[1]]></conversion_rate>
         <note><![CDATA[{note}]]></note>
     </order>
-</prestashop>"""    
+</prestashop>"""

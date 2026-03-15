@@ -1,5 +1,6 @@
 from page_objects.base_page import BasePage
 
+
 class CurrencyChange(BasePage):
     PRICE_ELEMENT = ".product-miniature:first-child .price"
     CURRENCY_ELEMENT = ".hidden-sm-down.btn-unstyle"

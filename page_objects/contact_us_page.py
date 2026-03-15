@@ -1,12 +1,12 @@
 from page_objects.base_page import BasePage
 from utils.decorators import allure_attach_on_fail, allure_step, log_action
 
+
 class ContactUsPage(BasePage):
     TITLE = "Contact us"
 
     STORE_BLOCK = ".contact-rich"
     FORM_BLOCK = ".contact-form"
-
 
     @allure_attach_on_fail
     @log_action

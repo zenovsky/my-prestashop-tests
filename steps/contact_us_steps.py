@@ -1,8 +1,8 @@
 from page_objects.contact_us_page import ContactUsPage
 from utils.decorators import allure_attach_on_fail, allure_step, log_action
 
-class ContactUsSteps:
 
+class ContactUsSteps:
     def __init__(self, browser):
         self.page = ContactUsPage(browser)
 

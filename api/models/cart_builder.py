@@ -1,5 +1,4 @@
 class CartBuilder:
-
     @staticmethod
     def create(address_id, customer_id, product_id):
         return f"""<?xml version="1.0" encoding="UTF-8"?>

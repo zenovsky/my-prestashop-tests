@@ -1,5 +1,4 @@
 class AddressBuilder:
-
     @staticmethod
     def create(customer_id):
         return f"""<?xml version="1.0" encoding="UTF-8"?>
@@ -17,7 +16,7 @@ class AddressBuilder:
     </address>
 </prestashop>
 """
-    
+
     def update(address_id, customer_id, phone_mobile):
         return f"""<?xml version="1.0" encoding="UTF-8"?>
 <prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -35,4 +34,4 @@ class AddressBuilder:
         <phone_mobile><![CDATA[{phone_mobile}]]></phone_mobile>
     </address>
 </prestashop>
-"""    
+"""

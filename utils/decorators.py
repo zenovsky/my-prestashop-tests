@@ -44,6 +44,7 @@ def mask_args(func, args, kwargs):
 
     return masked_pos, masked_kw
 
+
 def normalize_arg(value):
     if isinstance(value, str):
         v = value.strip()
@@ -56,6 +57,7 @@ def normalize_arg(value):
 
     return value
 
+
 def log_action(func):
     @wraps(func)
     def wrapper(self, *args, **kwargs):
@@ -65,9 +67,9 @@ def log_action(func):
 
         # args_repr = ", ".join([repr(a) for a in masked_args] + [f"{k}={v!r}" for k, v in masked_kwargs.items()])
         args_repr = ", ".join(
-        [repr(normalize_arg(a)) for a in masked_args] +
-        [f"{k}={normalize_arg(v)!r}" for k, v in masked_kwargs.items()]
-)
+            [repr(normalize_arg(a)) for a in masked_args]
+            + [f"{k}={normalize_arg(v)!r}" for k, v in masked_kwargs.items()]
+        )
 
         logger.info(f"Calling: {func.__name__}({args_repr})", stacklevel=2)
 

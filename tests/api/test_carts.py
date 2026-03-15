@@ -1,5 +1,5 @@
-import pytest
 import allure
+import pytest
 
 
 @pytest.mark.api
@@ -11,6 +11,7 @@ def test_create_cart(cart_scenario):
     allure.dynamic.description("Create a new cart with minimal fields")
     cart_scenario.create_cart()
 
+
 @pytest.mark.api
 @allure.epic("API tests")
 @allure.feature("Cart API")
@@ -21,6 +22,7 @@ def test_get_cart(cart_scenario):
     cart = cart_scenario.existing_cart()
     cart_scenario.get_cart(cart["cart_id"])
 
+
 @pytest.mark.api
 @allure.epic("API tests")
 @allure.feature("Cart API")
@@ -29,10 +31,8 @@ def test_get_cart(cart_scenario):
 def test_update_cart(cart_scenario):
     allure.dynamic.description("Add quantity of product to cart")
     cart = cart_scenario.existing_cart()
-    cart_scenario.update_cart(
-        cart,
-        "3"
-    )
+    cart_scenario.update_cart(cart, "3")
+
 
 @pytest.mark.api
 @allure.epic("API tests")
@@ -42,4 +42,4 @@ def test_update_cart(cart_scenario):
 def test_delete_cart(cart_scenario):
     allure.dynamic.description("Delete cart (and check 404 after deletion)")
     cart = cart_scenario.existing_cart()
-    cart_scenario.delete_cart(cart["cart_id"])    
+    cart_scenario.delete_cart(cart["cart_id"])

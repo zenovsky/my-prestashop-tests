@@ -1,11 +1,12 @@
 import logging
+
 from api.models.product_builder import ProductBuilder
 from utils.decorators import log_action
 
 logger = logging.getLogger(__name__)
 
-class ProductFactory:
 
+class ProductFactory:
     def __init__(self, products_api):
         self.api = products_api
         self._created_ids = []
@@ -15,12 +16,7 @@ class ProductFactory:
         xml = ProductBuilder.create(name=name, price=price, category_id=category_id)
         product_id = self.api.create(xml)
         self._created_ids.append(product_id)
-        return {
-            "product_id": product_id,
-            "name": name,
-            "price": price,
-            "category_id": category_id
-        }
+        return {"product_id": product_id, "name": name, "price": price, "category_id": category_id}
 
     @log_action
     def get(self, product_id):
@@ -28,16 +24,12 @@ class ProductFactory:
 
     @log_action
     def update(self, product_id, new_price=None, new_name=None):
-        xml = ProductBuilder.update(
-            product_id,
-            price=new_price,
-            name=new_name
-        )
+        xml = ProductBuilder.update(product_id, price=new_price, name=new_name)
         self.api.update(product_id, xml)
         updated_data = self.api.get(product_id)
         if new_price:
-            assert float(updated_data['price']) == float(new_price)
-        return updated_data    
+            assert float(updated_data["price"]) == float(new_price)
+        return updated_data
 
     @log_action
     def delete(self, product_id):

@@ -1,6 +1,4 @@
-
 class CustomerBuilder:
-
     @staticmethod
     def create(lastname, firstname, email):
         return f"""<?xml version="1.0" encoding="UTF-8"?>
@@ -29,13 +27,7 @@ class CustomerBuilder:
 """
 
     @staticmethod
-    def update(
-        customer_id, 
-        note,
-        lastname,
-        firstname,
-        email
-        ):
+    def update(customer_id, note, lastname, firstname, email):
         hashed_password = "$2y$12$fweiUfwFpFYtsdv44XKKNu1DYi5w.rSTfqBJKIjdii8d3in25TuyK"
 
         return f"""<?xml version="1.0" encoding="UTF-8"?>

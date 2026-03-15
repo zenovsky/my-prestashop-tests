@@ -7,7 +7,6 @@ from selenium.webdriver.chrome.options import Options as ChromeOption
 from selenium.webdriver.edge.options import Options as EdgeOption
 from selenium.webdriver.firefox.options import Options as FFOption
 
-
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",

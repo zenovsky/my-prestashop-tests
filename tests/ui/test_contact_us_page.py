@@ -1,7 +1,9 @@
-import pytest
 import allure
-from steps.contact_us_steps import ContactUsSteps
+import pytest
+
 from page_objects.contact_us_page import ContactUsPage
+from steps.contact_us_steps import ContactUsSteps
+
 
 @pytest.mark.ui
 @allure.epic("UI tests")

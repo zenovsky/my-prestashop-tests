@@ -1,5 +1,6 @@
-import pytest
 import allure
+import pytest
+
 
 @pytest.mark.api
 @allure.epic("API tests")
@@ -9,6 +10,7 @@ import allure
 def test_create_order(order_scenario):
     allure.dynamic.description("Create a new order")
     order_scenario.create_order()
+
 
 @pytest.mark.api
 @allure.epic("API tests")
@@ -20,6 +22,7 @@ def test_get_order(order_scenario):
     order = order_scenario.existing_order()
     order_scenario.get_order(order["order_id"])
 
+
 @pytest.mark.api
 @allure.epic("API tests")
 @allure.feature("Order API")
@@ -28,10 +31,8 @@ def test_get_order(order_scenario):
 def test_update_order(order_scenario):
     allure.dynamic.description("Add comment to order")
     order = order_scenario.existing_order()
-    order_scenario.update_order(
-        order,
-        "Update check"
-    )
+    order_scenario.update_order(order, "Update check")
+
 
 @pytest.mark.api
 @allure.epic("API tests")

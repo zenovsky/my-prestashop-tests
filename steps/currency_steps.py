@@ -3,7 +3,6 @@ from utils.decorators import allure_attach_on_fail, allure_step, log_action
 
 
 class CurrencySteps:
-
     def __init__(self, browser):
         self.page = CurrencyChange(browser)
 
@@ -12,7 +11,7 @@ class CurrencySteps:
     @allure_step("Get the current price")
     def get_price(self):
         return self.page.get_price_text()
-    
+
     @allure_attach_on_fail
     @log_action
     @allure_step("Call the drop-down list to change the currency")
