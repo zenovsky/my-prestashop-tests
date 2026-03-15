@@ -41,6 +41,7 @@ pipeline {
                 echo 'Running services via Makefile...'
                 sh 'make clean || true'
                 sh 'make setup'
+                generatedApiKey = sh(script: "grep API_KEY .env | cut -d'=' -f2", returnStdout: true).trim()
             }
         }
 
@@ -67,6 +68,7 @@ pipeline {
                             sh """
                             docker compose run --name ${testContainer} \
                                 -e HUB_EXECUTOR=${params.HUB_EXECUTOR} \
+                                -e API_KEY=${generatedApiKey} \
                                 -e APP_URL=${params.APP_URL} \
                                 -e BROWSER_NAME=${params.BROWSER_NAME} \
                                 -e BROWSER_VERSION=${params.BROWSER_VERSION} \
