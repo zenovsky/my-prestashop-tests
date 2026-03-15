@@ -59,6 +59,7 @@ Run tests:
 pytest -m {test type} -v -s --executor=local --browser={browser} --headless
 ```
 test type: api or ui
+
 browser: ch = chrome or ff = firefox
 
 ## 2. Locally run by docker
@@ -73,6 +74,7 @@ Run tests:
 docker run -it --rm --network=host -e ADMIN_EMAIL={email} -e ADMIN_PASSWORD={password} -e API_KEY={key} image:version pytest -m {test type} -v -s --executor=local --browser={browser} --headless
 ```
 test type: api or ui
+
 browser: ch = chrome or ff = firefox
 
 ## 3. Running tests with Selenoid
