@@ -41,7 +41,12 @@ pipeline {
                 echo 'Running services via Makefile...'
                 sh 'make clean || true'
                 sh 'make setup'
-                generatedApiKey = sh(script: "grep API_KEY .env | cut -d'=' -f2", returnStdout: true).trim()
+                script {
+                    generatedApiKey = sh(
+                        script: "grep API_KEY .env | cut -d'=' -f2", 
+                        returnStdout: true
+                    ).trim()
+                }
             }
         }
 
