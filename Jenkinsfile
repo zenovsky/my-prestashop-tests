@@ -82,6 +82,7 @@ pipeline {
                                 tests /bin/sh -c "
                                     echo 'Cleaning install folder...' && rm -rf /var/www/html_site/install;
                                     pytest -n ${params.THREADS} \
+                                    ${testMarker} \
                                     --browser ${params.BROWSER_NAME} \
                                     --url ${params.APP_URL} \
                                     --browser_version ${params.BROWSER_VERSION} \
