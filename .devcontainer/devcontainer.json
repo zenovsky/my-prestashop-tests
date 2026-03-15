@@ -1,0 +1,20 @@
+{
+  "name": "Prestashop Tests Local",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.pytest"
+      ]
+    }
+  },
+  "runArgs": [
+    "--rm",
+    "--network=host"
+  ],
+  "postCreateCommand": "pip install -r requirements.txt",
+  "remoteUser": "root"
+}

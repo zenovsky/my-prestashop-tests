@@ -1,0 +1,39 @@
+# Version control
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+.devcontainer
+
+# Python
+__pycache__
+*.pyc
+.pytest_cache
+.venv
+venv
+ruff
+.ruff
+.ruff_cache
+
+# Logs
+*.log
+logs/
+test.log
+
+# Test artifacts
+allure-results/
+allure-report/
+allure-report
+allure-results
+
+# Secrets 
+.env
+
+# CI/CD
+jenkins
+selenoid
+docker-compose
+Jenkinsfile
