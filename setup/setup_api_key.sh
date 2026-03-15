@@ -42,7 +42,8 @@ if ($account->save()) {
         'order_histories' => ['GET' => 1, 'POST' => 1, 'PUT' => 1]
     ];
     
-    WebserviceKey::setPermissionForAccount($account->id, $permissions);
+    $id_key = (int)$account->id;
+    WebserviceKey::setPermissionForAccount($id_key, $permissions);
     echo "Webservice enabled and API key configured successfully! (ID: {$account->id})\n";
 } else {
     echo "Error: Failed to create API key in PrestaShop.\n";
