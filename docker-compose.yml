@@ -68,8 +68,7 @@ services:
       prestashop:
         condition: service_started
     volumes:
-      - ${PWD}/allure-results:/app/allure-results 
-      #- ${PWD}/.env:/app/.env:ro
+      - ${PWD}/allure-results:/app/allure-results
       - ps_data:/var/www/html_site
     environment:
       HUB_EXECUTOR: nginx
