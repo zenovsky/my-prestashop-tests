@@ -17,27 +17,28 @@ The framework is designed to demonstrate a **complete QA automation environment*
 
 ## Project Structure
 
-.
-├── api/ # API testing layer
-│ ├── endpoints/ # API endpoints wrappers
-│ ├── helpers/ # factories for test data
-│ ├── models/ # builders for API objects
-│ └── scenarios/ # business logic scenarios
+```
+├── api/                # API testing layer
+│   ├── endpoints/      # API endpoints wrappers
+│   ├── helpers/        # factories for test data
+│   ├── models/         # builders for API objects
+│   └── scenarios/      # business logic scenarios
 │
-├── page_objects/ # UI Page Object Model
-├── steps/ # reusable UI test steps
+├── page_objects/       # UI Page Object Model
+├── steps/              # reusable UI test steps
 │
 ├── tests/
-│ ├── api/ # API tests
-│ └── ui/ # UI tests
+│   ├── api/            # API tests
+│   └── ui/             # UI tests
 │
-├── setup/ # scripts for PrestaShop initialization
+├── setup/              # scripts for PrestaShop initialization
 │
-├── selenoid/ # Selenoid configuration
+├── selenoid/           # Selenoid configuration
 │
-├── docker-compose.yml # test environment
-├── Jenkinsfile # CI pipeline
-└── config.py # project configuration
+├── docker-compose.yml  # test environment
+├── Jenkinsfile         # CI pipeline
+└── config.py           # project configuration
+```
 
 ---
 
