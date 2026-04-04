@@ -18,23 +18,20 @@ pipeline {
             }
         }
 
-    stage('Linting') {
-        steps {
-            script {
-            echo "Checking with Ruff linter..."
-                try {
-                sh '''
-                    python3 -m venv venv
-                    ./venv/bin/python3 -m pip install ruff
-                    ./venv/bin/python3 -m ruff check .
-                '''
-                } finally {
-                echo "Cleaning the virtual environment..."
-                sh 'rm -rf venv'
+        stage('Linting') {
+            steps {
+                script {
+                    echo "Starting linter container..."
+                    sh """
+                        docker-compose run --rm linter /bin/sh -c "
+                            python3 -m venv venv
+                            ./venv/bin/python3 -m pip install ruff
+                            ./venv/bin/python3 -m ruff check .
+                        "
+                    """
                 }
             }
         }
-    }
 
         stage('Prepare Environment') {
             steps {

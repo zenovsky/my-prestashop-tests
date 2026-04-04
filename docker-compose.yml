@@ -85,6 +85,18 @@ services:
       --executor $${HUB_EXECUTOR}
       "
 
+  linter:
+    image: python:3.9-slim
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: >
+      /bin/sh -c "
+      python3 -m venv venv
+      ./venv/bin/python3 -m pip install ruff
+      ./venv/bin/python3 -m ruff check .
+      "
+
 volumes:
   db_data:
     driver: local
