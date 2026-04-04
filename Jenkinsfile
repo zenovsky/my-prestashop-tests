@@ -22,15 +22,8 @@ pipeline {
             steps {
                 script {
                     echo "Starting linter container..."
-                    sh """
-                        docker-compose run --rm linter /bin/sh -c "
-                            pwd
-                            ls -la
-                            python3 -m venv venv
-                            ./venv/bin/python3 -m pip install ruff
-                            ./venv/bin/python3 -m ruff check /app
-                        "
-                    """
+                    sh "docker build -t my-linter -f Dockerfile.linter ."
+                    sh "docker run --rm my-linter"
                 }
             }
         }
