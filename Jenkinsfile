@@ -26,7 +26,7 @@ pipeline {
                         docker-compose run --rm linter /bin/sh -c "
                             python3 -m venv venv
                             ./venv/bin/python3 -m pip install ruff
-                            ./venv/bin/python3 -m ruff check .
+                            ./venv/bin/python3 -m ruff check /app
                         "
                     """
                 }
