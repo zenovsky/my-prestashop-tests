@@ -1,4 +1,5 @@
 from page_objects.base_page import BasePage
+from utils.decorators import allure_attach_on_fail, allure_step, log_action
 
 
 class CurrencyChange(BasePage):
@@ -7,12 +8,23 @@ class CurrencyChange(BasePage):
     PRICE_EUR = "a[title='Euro']"
     PRICE_DOLLAR = "a[title='US Dollar']"
 
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Get the current price")
     def get_price_text(self):
         price = self.wait_element(self.PRICE_ELEMENT)
         return price.text.strip()
 
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Call the drop-down list to change the currency")
     def click_currency_dropdown(self):
         self.wait_element(self.CURRENCY_ELEMENT).click()
 
+
+    @allure_attach_on_fail
+    @log_action
+    @allure_step("Select currency")
     def select_currency(self, currency_selector):
         self.wait_element(currency_selector).click()
+

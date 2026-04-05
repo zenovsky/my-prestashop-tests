@@ -2,7 +2,6 @@ import allure
 import pytest
 
 from page_objects.contact_us_page import ContactUsPage
-from steps.contact_us_steps import ContactUsSteps
 
 
 @pytest.mark.ui
@@ -12,8 +11,9 @@ from steps.contact_us_steps import ContactUsSteps
 @allure.severity(allure.severity_level.CRITICAL)
 def test_open_contact_us_page(browser):
     allure.dynamic.description("Checking if a Contact Us page opens")
-    steps = ContactUsSteps(browser)
-    steps.check_contact_us_title()
+    contact_us_page = ContactUsPage(browser)
+    contact_us_page.open_contact_us_page()
+    contact_us_page.wait_title_contact_us()
 
 
 @pytest.mark.ui
@@ -30,6 +30,6 @@ def test_open_contact_us_page(browser):
 @allure.severity(allure.severity_level.CRITICAL)
 def test_elements_visible_on_contact_us_page(browser, element_name, selector):
     allure.dynamic.description(f"Checking a display {element_name} on a page")
-    steps = ContactUsSteps(browser)
-    steps.check_contact_us_title()
-    assert steps.check_element_visible(selector), f"{element_name} is not visible"
+    contact_us_page = ContactUsPage(browser)
+    contact_us_page.open_contact_us_page()
+    assert contact_us_page.element_visible(selector), f"{element_name} is not visible"
