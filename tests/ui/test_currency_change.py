@@ -1,8 +1,8 @@
 import allure
 import pytest
 
-from page_objects.main_page import MainPage
 from page_objects.currency_change import CurrencyChange
+from page_objects.main_page import MainPage
 
 
 @pytest.mark.ui
