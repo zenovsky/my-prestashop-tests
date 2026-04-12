@@ -23,7 +23,6 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="session")
 def base_url(request):
     url = request.config.getoption("--url")
-    executor = request.config.getoption("--executor")
     return url
 
 
