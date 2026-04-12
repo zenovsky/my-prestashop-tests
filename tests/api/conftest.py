@@ -1,5 +1,3 @@
-import logging
-
 import pytest
 
 from api.api_client import APIClient
@@ -24,16 +22,9 @@ from api.scenarios.product_scenarios import ProductScenario
 
 
 @pytest.fixture(scope="session")
-def api_client(request):
-    executor = request.config.getoption("--executor")
-    base_url = request.config.getoption("--url")
-
-    if executor == "local":
-        base_url = "http://localhost:8081/api"
-    else:
-        base_url = f"{base_url}/api"
-
-    return APIClient(base_url=base_url)
+def api_client(base_url):
+    api_url = f"{base_url.rstrip('/')}/api"
+    return APIClient(base_url=api_url)
 
 
 @pytest.fixture
@@ -137,8 +128,3 @@ def cart_scenario(cart_factory):
 @pytest.fixture
 def order_scenario(order_factory):
     return OrderScenario(order_factory)
-
-
-def pytest_runtest_call(item):
-    logger = logging.getLogger("TEST")
-    logger.info(f"\n===== {item.name} =====")

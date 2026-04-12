@@ -21,10 +21,8 @@ class CurrencyChange(BasePage):
     def click_currency_dropdown(self):
         self.wait_element(self.CURRENCY_ELEMENT).click()
 
-
     @allure_attach_on_fail
     @log_action
     @allure_step("Select currency")
     def select_currency(self, currency_selector):
         self.wait_element(currency_selector).click()
-
