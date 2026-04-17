@@ -41,9 +41,8 @@ class APIClient:
     def _generate_curl(self, req: requests.PreparedRequest) -> str:
         command = f"curl -X {req.method} '{req.url}' \\\n"
         for k, v in req.headers.items():
-            if k.lower() == "authorization":
-                v = "***MASKED***"
-            command += f"  -H '{k}: {v}' \\\n"
+            header_value = "***MASKED***" if k.lower() == "authorization" else v
+            command += f"  -H '{k}: {header_value}' \\\n"
         if req.body:
             body = req.body
             if isinstance(body, bytes):
@@ -67,15 +66,6 @@ class APIClient:
     def delete(self, resource, resource_id):
         endpoint = f"{resource}/{resource_id}"
         return self.request("DELETE", endpoint)
-
-    @staticmethod
-    def parse_xml(xml):
-        return ET.fromstring(xml)
-
-    @staticmethod
-    def get_id_from_response(xml):
-        root = ET.fromstring(xml)
-        return int(root.find(".//id").text)
 
     @staticmethod
     def parse_xml(xml):
