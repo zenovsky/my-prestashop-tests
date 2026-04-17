@@ -37,7 +37,7 @@ class APIClient:
         self.request_history.append(curl_command)
 
         return response
-    
+
     def _generate_curl(self, req: requests.PreparedRequest) -> str:
         command = f"curl -X {req.method} '{req.url}' \\\n"
         for k, v in req.headers.items():
@@ -50,7 +50,7 @@ class APIClient:
                 body = body.decode('utf-8')
             body = body.replace("'", "'\\''")
             command += f"  -d '{body}'"
-            
+
         return command.strip(" \\\n")
 
     def get(self, resource, resource_id=None, params=None):
@@ -76,14 +76,14 @@ class APIClient:
     def get_id_from_response(xml):
         root = ET.fromstring(xml)
         return int(root.find(".//id").text)
-    
+
     @staticmethod
     def parse_xml(xml):
         return ET.fromstring(xml)
-    
+
     @staticmethod
     def get_id_from_response(xml):
         root = ET.fromstring(xml)
         return int(root.find(".//id").text)
-    
+
 

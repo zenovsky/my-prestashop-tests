@@ -132,4 +132,4 @@ def order_scenario(order_factory):
 @pytest.fixture(autouse=True)
 def clear_api_history(api_client):
     api_client.request_history.clear()
-    yield                  
+    yield
