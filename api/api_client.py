@@ -20,6 +20,8 @@ class APIClient:
             {"Authorization": f"Basic {auth_str}", "Content-Type": "application/xml", "Accept": "application/xml"}
         )
 
+        self.request_history = []
+
     def request(self, method, endpoint, **kwargs):
         endpoint = endpoint.lstrip("/")
         url = f"{self.base_url}/{endpoint}"
@@ -31,22 +33,40 @@ class APIClient:
         logger.info(f"{method.upper():6} /{endpoint:<20} {response.status_code} ({duration}s)")
         logger.debug(f"Response body:\n{response.text[:500]}")
 
+        curl_command = self._generate_curl(response.request)
+        self.request_history.append(curl_command)
+
         return response
+    
+    def _generate_curl(self, req: requests.PreparedRequest) -> str:
+        command = f"curl -X {req.method} '{req.url}' \\\n"
+        for k, v in req.headers.items():
+            if k.lower() == "authorization":
+                v = "***MASKED***"
+            command += f"  -H '{k}: {v}' \\\n"
+        if req.body:
+            body = req.body
+            if isinstance(body, bytes):
+                body = body.decode('utf-8')
+            body = body.replace("'", "'\\''")
+            command += f"  -d '{body}'"
+            
+        return command.strip(" \\\n")
 
     def get(self, resource, resource_id=None, params=None):
         endpoint = f"{resource}/{resource_id}" if resource_id else resource
-        return self._request("GET", endpoint, params=params)
+        return self.request("GET", endpoint, params=params)
 
     def post(self, resource, data):
-        return self._request("POST", resource, data=data)
+        return self.request("POST", resource, data=data)
 
     def put(self, resource, resource_id, data):
         endpoint = f"{resource}/{resource_id}"
-        return self._request("PUT", endpoint, data=data)
+        return self.request("PUT", endpoint, data=data)
 
     def delete(self, resource, resource_id):
         endpoint = f"{resource}/{resource_id}"
-        return self._request("DELETE", endpoint)
+        return self.request("DELETE", endpoint)
 
     @staticmethod
     def parse_xml(xml):
@@ -56,3 +76,14 @@ class APIClient:
     def get_id_from_response(xml):
         root = ET.fromstring(xml)
         return int(root.find(".//id").text)
+    
+    @staticmethod
+    def parse_xml(xml):
+        return ET.fromstring(xml)
+    
+    @staticmethod
+    def get_id_from_response(xml):
+        root = ET.fromstring(xml)
+        return int(root.find(".//id").text)
+    
+

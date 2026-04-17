@@ -128,3 +128,8 @@ def cart_scenario(cart_factory):
 @pytest.fixture
 def order_scenario(order_factory):
     return OrderScenario(order_factory)
+
+@pytest.fixture(autouse=True)
+def clear_api_history(api_client):
+    api_client.request_history.clear()
+    yield                  
